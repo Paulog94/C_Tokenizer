@@ -1,0 +1,40 @@
+# Test Cases For tokenizer.c
+make;
+./tokenizer "today is a beautiful day";
+#expected output:
+#word "today"
+#word "is"
+#word "a"
+#word "beautiful"
+#word "day"
+./tokenizer "0x4356abdc 0777 []";
+#expected output:
+#hex integer "0x4356abdc"
+#octal integer "0777"
+#leftbrace "["
+#rightbrace "]"
+./tokenizer "array[xyz ] += pi 3.14159e-10";
+#expected output:
+#word "array"
+#leftbrace "["
+#word "xyz"
+#rightbrace "]"
+#plusequals "+="
+#word "pi"
+#float "3.14159e-10"
+./tokenizer
+#expected output:
+#error: No argument
+./tokenizer "hello" "Its me";
+#expected output:
+#error: too many arguments
+./tokenizer "+-_={!@#$^&**&&";
+#expected output:
+#plus "+"
+#minus "-"
+#underscore "_"
+#equals "="
+#leftbracket "{"
+#negate "!"
+#Undefined "@"
+#Undefined "$"
